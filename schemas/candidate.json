@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ceptecukka.local/schemas/candidate.json",
+  "title": "CeptecukkaCandidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "working_title",
+    "one_liner",
+    "vein",
+    "angle",
+    "contradiction",
+    "visual_potential",
+    "claims_to_check",
+    "seed_urls",
+    "format",
+    "score_total",
+    "score",
+    "risks",
+    "why_now"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "working_title": { "type": "string", "minLength": 4, "maxLength": 120 },
+    "one_liner": { "type": "string", "minLength": 12, "maxLength": 280 },
+    "vein": { "enum": ["A", "B", "C", "D", "E", "F", "G", "H"] },
+    "angle": { "type": "string", "minLength": 12 },
+    "contradiction": { "type": "string", "minLength": 8 },
+    "visual_potential": { "type": "string", "minLength": 8 },
+    "claims_to_check": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "seed_urls": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "format": "uri" }
+    },
+    "format": { "enum": ["carousel", "single", "reel_later"] },
+    "score_total": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visual", "story", "surprise", "verifiable", "angle", "freshness"],
+      "properties": {
+        "visual": { "type": "integer", "minimum": 0, "maximum": 25 },
+        "story": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "surprise": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "verifiable": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "angle": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "freshness": { "type": "integer", "minimum": 0, "maximum": 10 }
+      }
+    },
+    "risks": { "type": "string" },
+    "why_now": { "type": "string" },
+    "killed": { "type": "boolean" },
+    "kill_reason": { "type": "string" }
+  }
+}

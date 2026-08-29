@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ceptecukka.local/schemas/publish-pack.json",
+  "title": "CeptecukkaPublishPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_id",
+    "titles",
+    "summary",
+    "caption_tr",
+    "caption_chars",
+    "slides",
+    "warnings",
+    "trust_score",
+    "verdict",
+    "editor_approved"
+  ],
+  "properties": {
+    "candidate_id": { "type": "string" },
+    "titles": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "type": "string" }
+    },
+    "summary": { "type": "string", "minLength": 12, "maxLength": 240 },
+    "caption_tr": { "type": "string", "minLength": 200, "maxLength": 2400 },
+    "caption_chars": { "type": "integer", "minimum": 0 },
+    "slides": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["order", "url", "alt", "license"],
+        "properties": {
+          "order": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "url": { "type": "string" },
+          "hires_url": { "type": "string" },
+          "maker": { "type": "string" },
+          "subject": { "type": "string" },
+          "date": { "type": "string" },
+          "origin": { "type": "string" },
+          "rights_holder": { "type": "string" },
+          "license": { "type": "string" },
+          "function": { "type": "string" },
+          "alt": { "type": "string" }
+        }
+      }
+    },
+    "sources": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "trust_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "verdict": { "enum": ["yayina_hazir", "ek_arastirma_gerekli"] },
+    "editor_approved": { "type": "boolean" }
+  }
+}
